@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import {urlConfig} from '../../config';
 import { useParams, useNavigate } from 'react-router-dom';
 import './DetailsPage.css';
 

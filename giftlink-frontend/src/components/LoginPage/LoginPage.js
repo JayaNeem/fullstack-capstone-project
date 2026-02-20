@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './LoginPage.css';
 import {urlConfig} from '../../config';
 import {useAppContext} from '../../context/AuthContext';
-import {useNavigate} from `react-router-dom`;
+import {useNavigate} from 'react-router-dom';
 
 function LoginPage() {
 
@@ -22,7 +22,7 @@ function LoginPage() {
     const handleLogin = async () => {
         try{
             //first task
-            const response = await fetch(`/api/auth/login`, {
+            const response = await fetch(`${urlConfig.backendUrl}/api/auth/login`, {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json',
@@ -41,8 +41,8 @@ function LoginPage() {
                 setIsLoggedIn(true);
                 navigate('/app');
             } else {
-                document.getElementById("email").value="";
-                document.getElementById("password").value="";
+                setEmail("");
+                setPassword("");
                 setIncorrect("Wrong password. Try again.");
             //Below is optional, but recommended - Clear out error message after 2 seconds
                 setTimeout(() => {

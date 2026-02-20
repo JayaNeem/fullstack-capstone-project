@@ -59,7 +59,7 @@ router.post('/login', async (req, res) => {
         const theUser = await collection.findOne({ email: req.body.email });
         // Task 4: Task 4: Check if the password matches the encrypyted password and send appropriate message on mismatch
         if (theUser) {
-            let isPasswordSame = await bcryptjs.compare(theUser.password, req.body.password);
+            let isPasswordSame = await bcryptjs.compare(req.body.password, theUser.password);
             if(!isPasswordSame) {
                 logger.error('Passwords do not match');
                 return res.status(404).json({ error: 'Wrong pasword' });
@@ -74,7 +74,7 @@ router.post('/login', async (req, res) => {
                     id: theUser._id.toString(),
                 },
             };
-            jwt.sign(payload, JWT_SECRET)
+            const authtoken = jwt.sign(payload, JWT_SECRET);
             res.json({authtoken, userName, userEmail });
             // Task 7: Send appropriate message if user not found
         } else {
@@ -83,7 +83,6 @@ router.post('/login', async (req, res) => {
         }
     } catch (e) {
          return res.status(500).send('Internal server error');
-
     }
 });
 

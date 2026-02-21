@@ -82,7 +82,7 @@ function RegisterPage() {
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}                                
                                 />
-                                
+                                <div className="text-danger">{showerr}</div>
                             </div>
                             <div className="mb-4">
                                 <label htmlFor="password" className="form label"> Password</label><br/>

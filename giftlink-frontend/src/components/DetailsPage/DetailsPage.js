@@ -7,6 +7,7 @@ function DetailsPage() {
     const navigate = useNavigate();
     const { productId } = useParams();
     const [gift, setGift] = useState(null);
+    const [sentiment, setSentiment] = useState('');
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -26,7 +27,8 @@ function DetailsPage() {
                     throw new Error('Network response was not ok');
                 }
                 const data = await response.json();
-                setGift(data);
+                setGift(data.gift);
+                setSentiment(data.sentiment);
             } catch (error) {
                 setError(error.message);
             } finally {
@@ -48,28 +50,28 @@ function DetailsPage() {
 	};
 
 	//The comments have been hardcoded for this project.
-    const comments = [
-        {
-            author: "John Doe",
-            comment: "I would like this!"
-        },
-        {
-            author: "Jane Smith",
-            comment: "Just DMed you."
-        },
-        {
-            author: "Alice Johnson",
-            comment: "I will take it if it's still available."
-        },
-        {
-            author: "Mike Brown",
-            comment: "This is a good one!"
-        },
-        {
-            author: "Sarah Wilson",
-            comment: "My family can use one. DM me if it is still available. Thank you!"
-        }
-    ];
+    // const comments = [
+    //     {
+    //         author: "John Doe",
+    //         comment: "I would like this!"
+    //     },
+    //     {
+    //         author: "Jane Smith",
+    //         comment: "Just DMed you."
+    //     },
+    //     {
+    //         author: "Alice Johnson",
+    //         comment: "I will take it if it's still available."
+    //     },
+    //     {
+    //         author: "Mike Brown",
+    //         comment: "This is a good one!"
+    //     },
+    //     {
+    //         author: "Sarah Wilson",
+    //         comment: "My family can use one. DM me if it is still available. Thank you!"
+    //     }
+    // ];
 
 
     if (loading) return <div>Loading...</div>;
@@ -93,7 +95,7 @@ return (
                     </div>
                     	<p><strong>Category:</strong> 
 				{gift.category}
-			</p>
+			            </p>
                     	<p><strong>Condition:</strong> 
 				{gift.condition}
                     	</p>
@@ -108,10 +110,14 @@ return (
                     	</p>
                 </div>
             </div>
+            <div className='mt-4'>
+                <h3 className="mb-3">Sentiments</h3>
+                <p>{sentiment}</p>
+            </div>
             <div className="comments-section mt-4">
                 <h3 className="mb-3">Comments</h3>
 				{/* Task 7: Render comments section by using the map function to go through all the comments*/}
-				{comments.map((comment, index) => (
+				{gift.comments.map((comment, index) => (
                     <div key={index} className="card mb-3">
                         <div className="card-body">
                             <p className="comment-author"><strong>{comment.author}:</strong></p>

@@ -10,7 +10,7 @@ The application connects users who wish to give away household items ​they no 
 - Search function allows user to search listing posted by other users based on various fields.
 - Register and Login functionality to allow user to access to protected resources. 
 - On Login navigation bar displays "Welcome" greeting with users first name and a Logout button in place of Register and Login button.
-- Details page contains the description provided by the user gifting the item and a comment section to let users communicate about that item.
+- Details page contains the description provided by the user gifting the item, a comment section to let users communicate about that item and overall comment sentiment.
 - Clicking on user name navigates to user profile page where he can edit his username.
 
 ## Tech Stack
@@ -37,7 +37,7 @@ The application connects users who wish to give away household items ​they no 
 10. User's detail are saved in the database and JWT token returned by the server which is stored in sessionStorage and login state flag is set in React Context.
 11. Navigation bar re-renders and displays User's First Name.
 12. User Clicks on a gift to view it's details.
-13. The details page fetch gift details from server to provide description about the item along with comments.
+13. The details page fetch gift details from server to provide description about the item along with comments and overall comment sentiment.
 14. User Clicks on User name provided in navigation link.
 15. User is redirected to profile page.
 16. The User Logs out by clinking on logout button.
@@ -61,6 +61,7 @@ npm install
 npm start
 
 #### Run the application
+Copy the MongoDB password and paste it in .env in the giftlink-backend folder  
 Open a terminal  
 Navigate into the giftlink-backend folder  
 Run below commands  
@@ -83,7 +84,6 @@ npm start
 - Deploy containers using Kubernetes.
 
 ## Future Improvements
-- Connect sentiment analysis server with Application to analyse gifts based on user comments.
 - Restoring login state after refresh.
 
 ## Notes
